@@ -18,5 +18,3 @@ export default function App() {
     </HashRouter>
   );
 }
-
-//cd C:\Users\kamch\ClimbingClubSite\p0-project

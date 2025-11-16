@@ -15,13 +15,11 @@ export default function VotingPoll({ pollId, question, options, includeOther = f
   const [votes, setVotes] = useState({});
   const [hasVoted, setHasVoted] = useState(false);
 
-  // Check sessionStorage on mount
   useEffect(() => {
     const voted = sessionStorage.getItem(`voted-${pollId}`);
     setHasVoted(!!voted);
   }, [pollId]);
 
-  // Listen for vote updates
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, "polls", pollId), (docSnap) => {
       if (docSnap.exists()) {
