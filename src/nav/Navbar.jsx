@@ -14,6 +14,8 @@ export default function Navbar() {
       <Link to="/about" style={{ color: "white", textDecoration: "none" }}>About Us</Link>
       <Link to="/insta" style={{ color: "white", textDecoration: "none" }}>Instagram</Link>
       <Link to="/vote" style={{ color: "white", textDecoration: "none" }}>Voting</Link>
+      <Link to="/schedule" style={{ color: "white", textDecoration: "none" }}>Schedule</Link>
+      <Link to="/admin" style={{ color: "white", textDecoration: "none" }}>Admin</Link>
     </nav>
   );
 }

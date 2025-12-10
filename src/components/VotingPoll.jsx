@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { db } from "../firebase";
 import {
   doc,
@@ -10,23 +10,40 @@ import {
   onSnapshot
 } from "firebase/firestore";
 
-export default function VotingPoll({ pollId, question, options, includeOther = false }) {
-  const [otherInput, setOtherInput] = useState("");
+export default function VotingPoll({ pollId }) {
+  const [question, setQuestion] = useState("");
+  const [options, setOptions] = useState([]);
   const [votes, setVotes] = useState({});
   const [hasVoted, setHasVoted] = useState(false);
 
+  // Check if user already voted in this session
   useEffect(() => {
     const voted = sessionStorage.getItem(`voted-${pollId}`);
     setHasVoted(!!voted);
   }, [pollId]);
 
+  // Listen for poll metadata (question + options)
   useEffect(() => {
-    const unsubscribe = onSnapshot(doc(db, "polls", pollId), (docSnap) => {
+    const unsubscribeMeta = onSnapshot(doc(db, "pollsMeta", pollId), (docSnap) => {
       if (docSnap.exists()) {
-        setVotes(docSnap.data());
+        const data = docSnap.data();
+        setQuestion(data.question || "");
+        setOptions(data.options || []);
       }
     });
-    return () => unsubscribe();
+    return () => unsubscribeMeta();
+  }, [pollId]);
+
+  // Listen for votes
+  useEffect(() => {
+    const unsubscribeVotes = onSnapshot(doc(db, "polls", pollId), (docSnap) => {
+      if (docSnap.exists()) {
+        setVotes(docSnap.data());
+      } else {
+        setVotes({});
+      }
+    });
+    return () => unsubscribeVotes();
   }, [pollId]);
 
   const handleVote = async (choice) => {
@@ -44,15 +61,8 @@ export default function VotingPoll({ pollId, question, options, includeOther = f
       }
       sessionStorage.setItem(`voted-${pollId}`, "true");
       setHasVoted(true);
-      setOtherInput("");
     } catch (err) {
       console.error("Vote failed:", err);
-    }
-  };
-
-  const handleOtherSubmit = () => {
-    if (otherInput.trim()) {
-      handleVote(otherInput);
     }
   };
 
@@ -66,41 +76,21 @@ export default function VotingPoll({ pollId, question, options, includeOther = f
     <div style={{ marginBottom: "2rem" }}>
       <h2>{question}</h2>
 
-      {!hasVoted ? (
-        <>
-          <div style={{ marginBottom: "1rem" }}>
-            {options.map((opt) => (
-              <Button
-                key={opt}
-                variant="primary"
-                style={{ margin: "0.5rem" }}
-                onClick={() => handleVote(opt)}
-              >
-                {opt}
-              </Button>
-            ))}
-          </div>
+      <div style={{ marginBottom: "1rem" }}>
+        {options.map((opt) => (
+          <Button
+            key={opt}
+            variant="primary"
+            style={{ margin: "0.5rem" }}
+            onClick={() => handleVote(opt)}
+            disabled={hasVoted} // disable if already voted
+          >
+            {opt}
+          </Button>
+        ))}
+      </div>
 
-          {includeOther && (
-            <Form.Group controlId="otherInput" style={{ maxWidth: "300px" }}>
-              <Form.Label>Other:</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your own answer"
-                value={otherInput}
-                onChange={(e) => setOtherInput(e.target.value)}
-              />
-              <Button
-                variant="secondary"
-                style={{ marginTop: "0.5rem" }}
-                onClick={handleOtherSubmit}
-              >
-                Submit
-              </Button>
-            </Form.Group>
-          )}
-        </>
-      ) : (
+      {hasVoted && (
         <p style={{ fontStyle: "italic", color: "gray" }}>
           You’ve already voted in this poll.
         </p>
@@ -108,7 +98,7 @@ export default function VotingPoll({ pollId, question, options, includeOther = f
 
       {Object.keys(votes).length > 0 && (
         <div style={{ marginTop: "2rem" }}>
-          <h4>Top 3 Responses:</h4>
+          <h4>Top Responses:</h4>
           <ol>
             {getTopVotes().map(([option, count]) => (
               <li key={option}>
