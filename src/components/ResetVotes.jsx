@@ -32,7 +32,7 @@ export default function ResetVotes() {
         style={{
           maxWidth: "700px",
           margin: "0 auto",
-          border: "2px solid #c0392b",
+          border: "4px solid #c0392b",
           boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
         }}
       >
@@ -40,7 +40,7 @@ export default function ResetVotes() {
           <h2 style={{ color: "#c0392b", textAlign: "center", marginBottom: "1rem" }}>
             Reset Votes
           </h2>
-          <p style={{ color: "#555", textAlign: "center" }}>
+          <p style={{ color: "#000000ff", textAlign: "center" }}>
             Use this interface to reset votes for existing polls. Click the button next to a poll to clear its votes.
           </p>
 

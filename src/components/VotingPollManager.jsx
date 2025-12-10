@@ -51,7 +51,7 @@ export default function VotingPollManager() {
         style={{
           maxWidth: "800px",
           margin: "0 auto",
-          border: "2px solid #27ae60",
+          border: "4px solid #27ae60",
           boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
         }}
       >
@@ -59,40 +59,41 @@ export default function VotingPollManager() {
           <h2 style={{ color: "#27ae60", textAlign: "center", marginBottom: "1rem" }}>
             Manage Polls
           </h2>
-          <p style={{ color: "#555", textAlign: "center" }}>
+          <p style={{ color: "#000000ff", textAlign: "center" }}>
             Add, view, and delete voting polls. Make sure the Poll ID is unique and the options are comma‑separated.
           </p>
 
           {/* Add Poll Form */}
           <Form style={{ marginBottom: "1.5rem" }}>
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2" controlId="pollId">
+              <Form.Label>Poll ID</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Poll ID"
                 value={newPollId}
                 onChange={(e) => setNewPollId(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2" controlId="pollQuestion">
+              <Form.Label>Poll Question</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Poll Question"
                 value={newQuestion}
                 onChange={(e) => setNewQuestion(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2" controlId="pollOptions">
+              <Form.Label>Options (comma separated)</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Options (comma separated)"
                 value={newOptions}
                 onChange={(e) => setNewOptions(e.target.value)}
               />
             </Form.Group>
-            <Button variant="success" onClick={handleAddPoll} style={{ width: "100%", fontWeight: "bold" }}>
+            <Button variant="success" onClick={handleAddPoll}>
               ➕ Add Poll
             </Button>
           </Form>
+
 
           {/* Existing Polls */}
           <h3 style={{ marginTop: "1rem", marginBottom: "1rem" }}>Existing Polls</h3>
@@ -112,7 +113,7 @@ export default function VotingPollManager() {
                 >
                   <strong>Question: {poll.question}</strong>
                   <span>Options: {poll.options.join(", ")}</span>
-                  <span style={{ fontSize: "0.9rem", color: "#666" }}>Poll ID: {poll.id}</span>
+                  <span style={{ fontSize: "0.9rem", color: "#000000ff" }}>Poll ID: {poll.id}</span>
                   <div style={{ textAlign: "right" }}>
                     <Button
                       variant="danger"

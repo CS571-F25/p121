@@ -16,7 +16,7 @@ function InstaPage() {
         <h1 style={{ color: "#f5f5f5", marginBottom: "1rem" }}>
           Climbing Club's Instagram Page
         </h1>
-        <p style={{ color: "#ddd", maxWidth: "600px", margin: "0 auto" }}>
+        <p style={{ color: "#ffffffff", maxWidth: "600px", margin: "0 auto" }}>
           Be sure to check out and follow our Instagram page{" "}
           <strong>@climbing_uw</strong> to stay up to date with the club's activities.
         </p>
@@ -25,7 +25,7 @@ function InstaPage() {
       {/* Instagram Feed Container */}
       <Card
         style={{
-          border: "2px solid #2980b9",
+          border: "4px solid #2980b9",
           borderRadius: "8px",
           backgroundColor: "#ffffff",
           padding: "1rem",

@@ -38,7 +38,7 @@ export default function Admin() {
       </div>
 
       {!unlocked ? (
-        <Card style={{ maxWidth: "400px", margin: "0 auto", padding: "1.5rem" }}>
+        <Card style={{ maxWidth: "400px", margin: "0 auto", padding: "1.5rem", border: "4px solid #c62020ff", borderRadius: "8px" }}>
           <Card.Body>
             <Form.Group>
               <Form.Label>Enter Admin Password</Form.Label>
@@ -61,7 +61,7 @@ export default function Admin() {
       ) : (
         <>
           {!selectedTool ? (
-            <Card style={{ maxWidth: "600px", margin: "0 auto", padding: "1.5rem" }}>
+            <Card style={{ maxWidth: "600px", margin: "0 auto", padding: "1.5rem", border: "4px solid #c62020ff", borderRadius: "8px" }}>
               <Card.Body style={{ textAlign: "center" }}>
                 <h2>Choose what to manage:</h2>
                 <div style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>

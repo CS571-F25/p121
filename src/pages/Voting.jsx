@@ -22,8 +22,8 @@ function Voting() {
     <div style={{ backgroundColor: "#1c1c1c", minHeight: "100vh", padding: "2rem" }}>
       {/* Hero Section */}
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <h1 style={{ color: "#f5f5f5", marginBottom: "1rem" }}>Voting</h1>
-        <p style={{ color: "#ddd", maxWidth: "700px", margin: "0 auto" }}>
+        <h1 style={{ color: "#ffffffff", marginBottom: "1rem" }}>Voting</h1>
+        <p style={{ color: "#ffffffff", maxWidth: "700px", margin: "0 auto" }}>
           This page is just for fun! Below you can find some lighthearted topics to vote on and
           see what fellow members and climbers think. Cast your vote and check out the top replies!
         </p>
@@ -36,7 +36,7 @@ function Voting() {
             key={poll.id}
             style={{
               marginBottom: "2rem",
-              border: "2px solid #2980b9",
+              border: "4px solid #2980b9",
               borderRadius: "8px",
               boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
               backgroundColor: "#ffffff",

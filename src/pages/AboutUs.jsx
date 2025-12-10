@@ -74,7 +74,7 @@ function AboutUs() {
       <Row>
         <Col md={3} sm={6} xs={12} style={{ marginBottom: "1rem" }}>
           <Card style={{ border: "4px solid #8e44ad", textAlign: "center" }}>
-            <Card.Img variant="top" src={miriImg} style={{ maxWidth: "100%", height: "auto" }} />
+            <Card.Img variant="top" src={miriImg} alt="Picture of President Miri" style={{ maxWidth: "100%", height: "auto" }} />
             <Card.Body style={{ backgroundColor: "#ffffff", color: "#2c3e50" }}>
               <Card.Title style={{ color: "#8e44ad" }}>Miri</Card.Title>
               <Card.Text>President</Card.Text>
@@ -83,7 +83,7 @@ function AboutUs() {
         </Col>
         <Col md={3} sm={6} xs={12} style={{ marginBottom: "1rem" }}>
           <Card style={{ border: "4px solid #e67e22", textAlign: "center" }}>
-            <Card.Img variant="top" src={miaImg} style={{ maxWidth: "100%", height: "auto" }} />
+            <Card.Img variant="top" src={miaImg} alt="Picture of Co-president Mia" style={{ maxWidth: "100%", height: "auto" }} />
             <Card.Body style={{ backgroundColor: "#ffffff", color: "#2c3e50" }}>
               <Card.Title style={{ color: "#e67e22" }}>Mia</Card.Title>
               <Card.Text>Vice President</Card.Text>
@@ -92,19 +92,19 @@ function AboutUs() {
         </Col>
         <Col md={3} sm={6} xs={12} style={{ marginBottom: "1rem" }}>
           <Card style={{ border: "4px solid #16a085", textAlign: "center" }}>
-            <Card.Img variant="top" src={peytonImg} style={{ maxWidth: "100%", height: "auto" }} />
+            <Card.Img variant="top" src={peytonImg} alt="Picture of Secretary Peyton" style={{ maxWidth: "100%", height: "auto" }} />
             <Card.Body style={{ backgroundColor: "#ffffff", color: "#2c3e50" }}>
               <Card.Title style={{ color: "#16a085" }}>Peyton</Card.Title>
-              <Card.Text>Treasurer</Card.Text>
+              <Card.Text>Secretary</Card.Text>
             </Card.Body>
           </Card>
         </Col>
         <Col md={3} sm={6} xs={12} style={{ marginBottom: "1rem" }}>
           <Card style={{ border: "4px solid #c0392b", textAlign: "center" }}>
-            <Card.Img variant="top" src={ianImg} style={{ maxWidth: "100%", height: "auto" }} />
+            <Card.Img variant="top" src={ianImg} alt="Picture of Treasurer Ian" style={{ maxWidth: "100%", height: "auto" }} />
             <Card.Body style={{ backgroundColor: "#ffffff", color: "#2c3e50" }}>
               <Card.Title style={{ color: "#c0392b" }}>Ian</Card.Title>
-              <Card.Text>Secretary</Card.Text>
+              <Card.Text>Treasurer</Card.Text>
             </Card.Body>
           </Card>
         </Col>

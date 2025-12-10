@@ -31,7 +31,7 @@ export default function Schedule() {
       {/* Hero Section */}
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
         <h1 style={{ color: "#f5f5f5", marginBottom: "1rem" }}>Club Calendar</h1>
-        <p style={{ color: "#ddd", maxWidth: "700px", margin: "0 auto" }}>
+        <p style={{ color: "#ffffffff", maxWidth: "700px", margin: "0 auto" }}>
           Below is the club's event schedule. Stay up to date with all upcoming climbs,
           meetings, and social events!
         </p>
@@ -40,7 +40,7 @@ export default function Schedule() {
       {/* Calendar Container */}
       <Card
         style={{
-          border: "2px solid #2980b9",
+          border: "4px solid #2980b9",
           borderRadius: "8px",
           backgroundColor: "#ffffff",
           padding: "1rem",

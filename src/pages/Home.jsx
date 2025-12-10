@@ -41,6 +41,8 @@ function Home() {
         position: "relative",
         color: "white",
       }}
+      role="img"
+      aria-label="picture of climbing club members after our first meeting Fall 2025"
     >
       {/* Overlay for contrast */}
       <div
@@ -65,7 +67,7 @@ function Home() {
         {/* About Section */}
         <h2>About the Club</h2>
         <HomeCard
-          icon={<FaInfoCircle />}
+          icon={<FaInfoCircle aria-hidden="true" style={{ marginRight: "8px" }} />}
           title="About Us"
           text="Learn about our club meetings, Boulder’s info, and how to get involved."
           buttonLabel="Learn More"
@@ -76,7 +78,7 @@ function Home() {
         {/* Instagram Section */}
         <h2>Stay Connected</h2>
         <HomeCard
-          icon={<FaInstagram />}
+          icon={<FaInstagram aria-hidden="true" style={{ marginRight: "8px" }} />}
           title="Instagram"
           text="See our latest photos and updates from the climbing community."
           buttonLabel="See Photos"
@@ -87,7 +89,7 @@ function Home() {
         {/* Voting Section */}
         <h2>Get Involved</h2>
         <HomeCard
-          icon={<FaVoteYea />}
+          icon={<FaVoteYea aria-hidden="true" style={{ marginRight: "8px" }}/>}
           title="Voting"
           text="Participate in fun polls and see what fellow climbers think."
           buttonLabel="Vote Now"
@@ -103,7 +105,7 @@ function Home() {
           events.map((ev) => (
             <HomeCard
               key={ev.id}
-              icon={<FaCalendarAlt />}
+              icon={<FaCalendarAlt aria-hidden="true" style={{ marginRight: "8px" }} />}
               title={ev.title}
               text={`${new Date(ev.start).toLocaleString()} ${
                 ev.end ? `– ${new Date(ev.end).toLocaleString()}` : ""

@@ -56,7 +56,7 @@ export default function AdminCalendar() {
         style={{
           maxWidth: "900px",
           margin: "0 auto",
-          border: "2px solid #2980b9",
+          border: "4px solid #2980b9",
           boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
         }}
       >
@@ -64,42 +64,41 @@ export default function AdminCalendar() {
           <h1 style={{ color: "#2980b9", textAlign: "center", marginBottom: "1rem" }}>
             Admin Calendar
           </h1>
-          <p style={{ color: "#555", textAlign: "center" }}>
+          <p style={{ color: "#000000ff", textAlign: "center" }}>
             Add, view, and delete calendar events. Enter the title and start/end dates to add an event.
           </p>
 
           {/* Add Event Form */}
           <Form style={{ marginBottom: "1.5rem" }}>
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2" controlId="eventTitle">
+              <Form.Label>Event Title</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Event Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2" controlId="eventStart">
+              <Form.Label>Start Date/Time</Form.Label>
               <Form.Control
                 type="datetime-local"
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
               />
             </Form.Group>
-            <Form.Group className="mb-2">
+            <Form.Group className="mb-2" controlId="eventEnd">
+              <Form.Label>End Date/Time</Form.Label>
               <Form.Control
                 type="datetime-local"
                 value={end}
                 onChange={(e) => setEnd(e.target.value)}
               />
             </Form.Group>
-            <Button
-              variant="success"
-              onClick={handleAddEvent}
-              style={{ width: "100%", fontWeight: "bold" }}
-            >
+            <Button variant="success" onClick={handleAddEvent}>
               ➕ Add Event
             </Button>
           </Form>
+
 
           {/* Calendar */}
           <Card style={{ marginBottom: "1.5rem", border: "1px solid #ddd" }}>
