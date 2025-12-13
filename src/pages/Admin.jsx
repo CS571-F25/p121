@@ -1,34 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+import React, { useState } from "react";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { auth } from "../firebase";
 import AdminCalendar from "../components/AdminCalendar";
 import VotingPollManager from "../components/VotingPollManager";
 import ResetVotes from "../components/ResetVotes";
 import { Card, Button, Form } from "react-bootstrap";
 
+const ADMIN_UID = "PDHfWcnRRrduIno7y3T96EPCKEF3";
+
 export default function Admin() {
-  const [unlocked, setUnlocked] = useState(false);
-  const [password, setPassword] = useState("");
-  const [storedPassword, setStoredPassword] = useState(null);
   const [selectedTool, setSelectedTool] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const fetchPassword = async () => {
-      const docRef = doc(db, "adminConfig", "settings");
-      const snap = await getDoc(docRef);
-      if (snap.exists()) {
-        setStoredPassword(snap.data().password);
+  const handleLogin = async () => {
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      if (result.user.uid === ADMIN_UID) {
+        setUser(result.user);
+      } else {
+        alert("Not authorized");
       }
-    };
-    fetchPassword();
-  }, []);
-
-  const handleUnlock = () => {
-    if (password === storedPassword) {
-      setUnlocked(true);
-    } else {
-      alert("Incorrect password");
+    } catch (err) {
+      alert("Login failed: " + err.message);
     }
+  };
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    setUser(null);
+    setSelectedTool(null);
   };
 
   return (
@@ -37,11 +39,20 @@ export default function Admin() {
         <h1 style={{ color: "#f5f5f5" }}>Admin Dashboard</h1>
       </div>
 
-      {!unlocked ? (
-        <Card style={{ maxWidth: "400px", margin: "0 auto", padding: "1.5rem", border: "4px solid #c62020ff", borderRadius: "8px" }}>
+      {!user ? (
+        <Card style={{ maxWidth: "400px", margin: "0 auto", padding: "1.5rem" }}>
           <Card.Body>
             <Form.Group>
-              <Form.Label>Enter Admin Password</Form.Label>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Admin email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Password"
@@ -52,16 +63,16 @@ export default function Admin() {
             <Button
               variant="primary"
               style={{ marginTop: "1rem", width: "100%" }}
-              onClick={handleUnlock}
+              onClick={handleLogin}
             >
-              Unlock
+              Login
             </Button>
           </Card.Body>
         </Card>
       ) : (
         <>
           {!selectedTool ? (
-            <Card style={{ maxWidth: "600px", margin: "0 auto", padding: "1.5rem", border: "4px solid #c62020ff", borderRadius: "8px" }}>
+            <Card style={{ maxWidth: "600px", margin: "0 auto", padding: "1.5rem" }}>
               <Card.Body style={{ textAlign: "center" }}>
                 <h2>Choose what to manage:</h2>
                 <div style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
@@ -75,6 +86,13 @@ export default function Admin() {
                     🔄 Reset Votes
                   </Button>
                 </div>
+                <Button
+                  variant="secondary"
+                  style={{ marginTop: "1rem" }}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
               </Card.Body>
             </Card>
           ) : (
